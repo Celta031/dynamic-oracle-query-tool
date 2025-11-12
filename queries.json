@@ -1,0 +1,62 @@
+[
+  {
+    "id": "update_user_profile",
+    "name": "Admin: Atualizar Perfil de Usuário",
+    "sql": "SELECT u.rowid, u.USER_ID, u.USERNAME, u.EMAIL, u.IS_ACTIVE, u.LAST_LOGIN\nFROM app_users u\nWHERE u.EMAIL = :user_email",
+    "target_table": "app_users",
+    "parameters": [
+      {
+        "bind_name": "user_email",
+        "label": "Email do Usuário *",
+        "placeholder": "exemplo@dominio.com",
+        "required": true
+      }
+    ],
+    "update_rules": {
+      "USERNAME": "USERNAME = :val_name",
+      "IS_ACTIVE": "IS_ACTIVE = :val_name",
+      "EMAIL": "EMAIL = :val_name"
+    }
+  },
+  {
+    "id": "adjust_inventory",
+    "name": "Estoque: Ajustar Quantidade de Produto",
+    "sql": "SELECT p.rowid, p.PRODUCT_ID, p.PRODUCT_NAME, s.STOCK_QUANTITY, s.LOCATION\nFROM products p, stock s\nWHERE p.PRODUCT_ID = s.PRODUCT_ID AND p.PRODUCT_ID = :product_id",
+    "target_table": "stock",
+    "parameters": [
+      {
+        "bind_name": "product_id",
+        "label": "ID do Produto (SKU) *",
+        "placeholder": "SKU-12345",
+        "required": true
+      },
+      {
+        "bind_name": "location_filter",
+        "label": "Filtrar por Local (Opcional)",
+        "placeholder": "A-01",
+        "required": false
+      }
+    ],
+    "update_rules": {
+      "STOCK_QUANTITY": "STOCK_QUANTITY = :val_name",
+      "LOCATION": "LOCATION = :val_name"
+    }
+  },
+  {
+    "id": "update_order_status",
+    "name": "Pedidos: Alterar Status de Pedido",
+    "sql": "SELECT o.rowid, o.ORDER_ID, c.CUSTOMER_NAME, o.ORDER_DATE, o.STATUS, o.SHIPPING_DATE\nFROM orders o, customers c\nWHERE o.CUSTOMER_ID = c.CUSTOMER_ID AND o.ORDER_ID = :order_id",
+    "target_table": "orders",
+    "parameters": [
+      {
+        "bind_name": "order_id",
+        "label": "ID do Pedido *",
+        "required": true
+      }
+    ],
+    "update_rules": {
+      "STATUS": "STATUS = :val_name",
+      "SHIPPING_DATE": "SHIPPING_DATE = TO_DATE(:val_name, 'DD/MM/YYYY')"
+    }
+  }
+]

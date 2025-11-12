@@ -1,0 +1,438 @@
+/* Reset Básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #005a9c;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+}
+
+h2 {
+    color: #005a9c;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+/* Formulários */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #005a9c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #004170;
+}
+
+button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* Tabela de Resultados */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Permite scroll horizontal em tabelas largas */
+}
+
+#results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed;
+}
+
+#results-table th, #results-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+#results-table thead {
+    background-color: #f0f4f8;
+}
+
+#results-table th {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #333;
+}
+
+#results-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#results-table tbody tr:hover {
+    background-color: #e6f0fa;
+}
+
+/* Checkbox de seleção */
+.row-selector {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Mensagens de Feedback */
+#feedback-message {
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+    display: none; /* Começa escondido */
+}
+
+#feedback-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    display: block;
+}
+
+#feedback-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    display: block;
+}
+
+#results-table thead th:first-child,
+#results-table tbody td:first-child {
+    position: sticky; /* Define a coluna como "pegajosa" */
+    left: 0;          /* Cola ela na borda esquerda */
+    z-index: 2;       /* Garante que ela fique por cima do resto */
+}
+
+#results-table thead th:first-child {
+    background-color: #f0f4f8; /* Cor de fundo do cabeçalho (thead) */
+}
+
+#results-table tbody td:first-child {
+    background-color: #ffffff; /* Cor de fundo padrão da linha */
+    z-index: 1; /* Fica acima dos dados, mas abaixo do cabeçalho */
+}
+
+#results-table tbody tr:nth-child(even) td:first-child {
+    background-color: #f9f9f9;
+}
+
+#results-table tbody tr:hover td:first-child {
+    background-color: #e6f0fa;
+}
+
+.header-with-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Remove a borda do H2 para usar esta */
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 20px;
+}
+.header-with-button h2 {
+    border-bottom: none; /* Remove a borda duplicada do h2 */
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+button.btn-secondary {
+    background-color: #6c757d;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+button.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+
+/* --- NOVO: Estilos do Modal (Popup) --- */
+
+.modal-overlay {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    /* Transição suave */
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Classe "active" que será ligada/desligada pelo JS */
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    /* Efeito de zoom */
+    transform: scale(0.95);
+    transition: transform 0.2s ease-in-out;
+}
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-content h3 {
+    color: #005a9c;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-content pre {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    overflow-x: auto; /* Scroll se a query for muito longa */
+}
+
+.modal-content code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.9rem;
+    white-space: pre-wrap; /* Quebra a linha da query se for muito longa */
+}
+
+.modal-content .rules-container ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.modal-content .rules-container li {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+.modal-content .rules-container li code {
+    font-size: 0.85rem;
+}
+
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+/* --- NOVO: Estilos do Modal de Edição (Popup) --- */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.95);
+    transition: transform 0.2s ease-in-out;
+}
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-content h3 {
+    color: #005a9c;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-content textarea {
+    width: 100%;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.9rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.modal-alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.modal-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+button.btn-danger {
+    background-color: #dc3545;
+}
+button.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* --- NOVO: Botão Secundário (Visualizar Query) --- */
+.header-with-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 20px;
+}
+.header-with-button h2 {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+button.btn-secondary {
+    background-color: #6c757d;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+button.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* --- NOVO: Ajuste para colunas congeladas --- */
+#results-table thead th:first-child,
+#results-table tbody td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+#results-table thead th:first-child {
+    background-color: #f0f4f8; 
+}
+#results-table tbody td:first-child {
+    background-color: #ffffff;
+    z-index: 1; 
+}
+#results-table tbody tr:nth-child(even) td:first-child {
+    background-color: #f9f9f9;
+}
+#results-table tbody tr:hover td:first-child {
+    background-color: #e6f0fa;
+}

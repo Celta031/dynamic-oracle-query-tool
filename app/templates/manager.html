@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Atualizações</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Gerenciador de Atualizações Dinâmicas</h1>
+    </header>
+
+    <main>
+        <section class="card">
+            <div class="header-with-button">
+                <h2>1. Seleção da Query</h2>
+                <button id="btn-show-query-modal" class="btn-secondary" disabled>Visualizar / Editar Query</button>
+            </div>
+            <div class="form-group">
+                <label for="query-select">Selecione a operação desejada:</label>
+                <select id="query-select">
+                    <option value="">-- Selecione uma query --</option>
+                    {% for query in queries_list %}
+                        <option value="{{ query.id }}">{{ query.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </section>
+
+        <section class="card" id="filter-section" style="display: none;">
+            <h2>2. Filtros de Busca</h2>
+            <form id="search-form">
+                <div id="filter-form-inputs"></div>
+                <button type="submit" id="btn-buscar">Buscar Registros</button>
+            </form>
+        </section>
+
+        <section class="card" id="results-section" style="display: none;">
+            <h2>3. Resultados da Busca</h2>
+            <div class="table-container">
+                <table id="results-table">
+                    </table>
+            </div>
+            <div id="no-results" style="display: none;">
+                <p>Nenhum registro encontrado com os filtros fornecidos.</p>
+            </div>
+        </section>
+
+
+        <section class="card" id="update-section" style="display: none;">
+            <h2>4. Aplicar Alterações</h2>
+            <p>Preencha <strong>apenas</strong> os campos que deseja alterar nas linhas selecionadas acima. Apenas colunas com 'Regras de Atualização' no JSON serão alteradas.</p>
+            
+            <form id="update-form">
+                <div id="update-form-inputs"></div>
+                <button type="submit" id="btn-atualizar">Confirmar e Atualizar Linhas</button>
+            </form>
+        </section>
+
+        <div id="feedback-message"></div>
+
+    </main>
+
+    <div id="query-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="btn-close-modal" class="modal-close">&times;</button>
+            <h3>Editar Query SQL</h3>
+            <p>Edite o SQL para a query <strong id="modal-query-name"></strong>.</p>
+            
+            <div class="modal-alert-danger">
+                <strong>🚨 ALERTA DE RISCO</strong><br>
+                Alterar esta query impacta o servidor. Um erro pode quebrar a aplicação ou corromper dados. Use apenas sintaxe SQL válida do Oracle.
+            </div>
+
+            <textarea id="modal-query-sql" rows="15"></textarea>
+            
+            <div class="modal-actions">
+                <button id="btn-save-query" class="btn-danger">Salvar Alterações no JSON</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/manager.js') }}"></script>
+</body>
+</html>
