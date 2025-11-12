@@ -32,7 +32,7 @@ Siga estes passos para executar o projeto localmente.
 ### 2. Clone o Repositório
 
 ```bash
-git clone [https://github.com/Celta031/dynamic-oracle-query-tool.git](https://github.com/Celta031/dynamic-oracle-query-tool.git)
+git clone https://github.com/Celta031/dynamic-oracle-query-tool.git
 cd dynamic-oracle-query-tool
 ```
 
