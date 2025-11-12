@@ -32,8 +32,8 @@ Siga estes passos para executar o projeto localmente.
 ### 2. Clone o Repositório
 
 ```bash
-git clone [https://github.com/SEU-USUARIO/NOME-DO-SEU-REPO.git](https://github.com/SEU-USUARIO/NOME-DO-SEU-REPO.git)
-cd NOME-DO-SEU-REPO
+git clone [https://github.com/Celta031/dynamic-oracle-query-tool.git](https://github.com/Celta031/dynamic-oracle-query-tool.git)
+cd dynamic-oracle-query-tool
 ```
 
 ### 3. Crie um Ambiente Virtual
